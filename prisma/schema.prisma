@@ -195,6 +195,7 @@ model Booking {
   rejected  Boolean   @default(false)
   status    BookingStatus @default(ACCEPTED)
   paid      Boolean @default(false)
+  mpesaMsg  String?
   payment   Payment[]
 }
 

@@ -18,7 +18,7 @@ const { google } = require("googleapis");
 
 const googleAuth = (credential) => {
   const { client_secret, client_id, redirect_uris } = JSON.parse(process.env.GOOGLE_API_CREDENTIALS).web;
-  const myGoogleAuth = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
+  const myGoogleAuth = new google.auth.OAuth2(client_id, client_secret, redirect_uris[1]);
   myGoogleAuth.setCredentials(credential.key);
 
   const isExpired = () => myGoogleAuth.isTokenExpiring();
@@ -113,6 +113,7 @@ const o365Auth = (credential) => {
 export type Person = { name: string; email: string; timeZone: string };
 
 export interface CalendarEvent {
+  mpesaMsg: any;
   type: string;
   title: string;
   startTime: string;

@@ -80,6 +80,7 @@ const BookingPage = (props: BookingPageProps) => {
       setLoading(true);
       setError(false);
       let notes = "";
+      let mpesa_msg = "";
       if (props.eventType.customInputs) {
         notes = props.eventType.customInputs
           .map((input) => {
@@ -99,6 +100,7 @@ const BookingPage = (props: BookingPageProps) => {
       } else {
         notes += event.target.notes.value;
       }
+      mpesa_msg = event.target.mpesa.value;
 
       const payload: BookingCreateBody = {
         start: dayjs(date).format(),
@@ -106,6 +108,7 @@ const BookingPage = (props: BookingPageProps) => {
         name: event.target.name.value,
         email: event.target.email.value,
         notes: notes,
+        mpesaMsg: mpesa_msg,
         guests: guestEmails,
         eventTypeId: props.eventType.id,
         timeZone: timeZone(),
@@ -426,6 +429,22 @@ const BookingPage = (props: BookingPageProps) => {
                       )}
                     </div>
                   )}
+                  <div className="mb-4">
+                    <label
+                      htmlFor="mpesa"
+                      className="block mb-1 text-sm font-medium text-gray-700 dark:text-white">
+                      {t("m_pesa_payment_label")}
+                    </label>
+                    <textarea
+                      name="mpesa"
+                      id="mpesa"
+                      rows={3}
+                      required={true}
+                      className="block w-full border-gray-300 rounded-md shadow-sm dark:bg-black dark:text-white dark:border-gray-900 focus:ring-black focus:border-black sm:text-sm"
+                      placeholder={t("m_pesa_payment")}
+                      defaultValue={props.booking ? props.booking.mpesaMsg : ""}
+                    />
+                  </div>
                   <div className="mb-4">
                     <label
                       htmlFor="notes"
