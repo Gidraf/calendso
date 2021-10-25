@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer";
+// import nodemailer from "nodemailer";
 
 import { serverConfig } from "../serverConfig";
 
@@ -27,8 +27,13 @@ const sendEmail = (invitation: Invitation, provider: EmailProvider): Promise<voi
     const { transport, from } = provider;
 
     const invitationHtml = html(invitation);
-    nodemailer.createTransport(transport).sendMail(
-      {
+    fetch("http://localhost:7000/api/v1/send_text_email", {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + "",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
         from: `Cal.com <${from}>`,
         to: invitation.toEmail,
         subject:
@@ -36,16 +41,38 @@ const sendEmail = (invitation: Invitation, provider: EmailProvider): Promise<voi
           ` to join ${invitation.teamName}`,
         html: invitationHtml,
         text: text(invitationHtml),
-      },
-      (error) => {
-        if (error) {
-          console.error("SEND_INVITATION_NOTIFICATION_ERROR", invitation.toEmail, error);
-          return reject(new Error(error));
-        }
-        return resolve();
-      }
-    );
+      }),
+        })
+          .then(handleErrorsJson)
+          .then((responseBody) => {console.log("email send successfully")})
+      
+    // nodemailer.createTransport(transport).sendMail(
+    //   {
+    //     from: `Cal.com <${from}>`,
+    //     to: invitation.toEmail,
+    //     subject:
+    //       (invitation.from ? invitation.from + " invited you" : "You have been invited") +
+    //       ` to join ${invitation.teamName}`,
+    //     html: invitationHtml,
+    //     text: text(invitationHtml),
+    //   },
+    //   (error) => {
+    //     if (error) {
+    //       console.error("SEND_INVITATION_NOTIFICATION_ERROR", invitation.toEmail, error);
+    //       return reject(new Error(error));
+    //     }
+    //     return resolve();
+    //   }
+    // );
   });
+
+  function handleErrorsJson(response) {
+  if (!response.ok) {
+    response.json().then((e) => console.error("Send Email Error", e));
+    throw Error(response.statusText);
+  }
+  return response.json();
+}
 
 export function html(invitation: Invitation): string {
   let url: string = process.env.BASE_URL + "/settings/teams";
