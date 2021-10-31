@@ -1,5 +1,4 @@
 // import nodemailer from "nodemailer";
-
 import { serverConfig } from "../serverConfig";
 
 export type Invitation = {
@@ -28,13 +27,13 @@ const sendEmail = (invitation: Invitation, provider: EmailProvider): Promise<voi
 
     const invitationHtml = html(invitation);
     fetch("http://localhost:7000/api/v1/send_text_email", {
-          method: "POST",
-          headers: {
-            Authorization: "Bearer " + "",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-        from: `Cal.com <${from}>`,
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + "",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: `winnig-cv.com <${from}>`,
         to: invitation.toEmail,
         subject:
           (invitation.from ? invitation.from + " invited you" : "You have been invited") +
@@ -42,10 +41,12 @@ const sendEmail = (invitation: Invitation, provider: EmailProvider): Promise<voi
         html: invitationHtml,
         text: text(invitationHtml),
       }),
-        })
-          .then(handleErrorsJson)
-          .then((responseBody) => {console.log("email send successfully")})
-      
+    })
+      .then(handleErrorsJson)
+      .then((responseBody) => {
+        console.log("email send successfully");
+      });
+
     // nodemailer.createTransport(transport).sendMail(
     //   {
     //     from: `Cal.com <${from}>`,
@@ -66,7 +67,7 @@ const sendEmail = (invitation: Invitation, provider: EmailProvider): Promise<voi
     // );
   });
 
-  function handleErrorsJson(response) {
+function handleErrorsJson(response) {
   if (!response.ok) {
     response.json().then((e) => console.error("Send Email Error", e));
     throw Error(response.statusText);
@@ -92,7 +93,7 @@ export function html(invitation: Invitation): string {
       Hi,<br />
       <br />` +
     (invitation.from ? invitation.from + " invited you" : "You have been invited") +
-    ` to join the team "${invitation.teamName}" in Cal.com.<br />
+    ` to join the team "${invitation.teamName}" in book.winning-cv.com.<br />
       <br />
       <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
         <tr>
@@ -110,7 +111,7 @@ export function html(invitation: Invitation): string {
           </td>
         </tr>
       </table><br />
-      If you prefer not to use "${invitation.toEmail}" as your Cal.com email or already have a Cal.com account, please request another invitation to that email.
+      If you prefer not to use "${invitation.toEmail}" as your book.winning-cv.com email or already have a book.winning-cv.com account, please request another invitation to that email.
       </td>
       </tr>
       </table>

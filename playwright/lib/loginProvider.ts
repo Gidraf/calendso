@@ -45,7 +45,7 @@ export function loginProvider(opts: {
       if (cachedCookies) {
         await context.addCookies(cachedCookies);
       } else {
-        await page.goto("http://localhost:3000/event-types");
+        await page.goto("http://localhost:9000/event-types");
         // Click input[name="email"]
         await page.click('input[name="email"]');
         // Fill input[name="email"]
@@ -63,7 +63,7 @@ export function loginProvider(opts: {
       }
 
       if (opts.path) {
-        await page.goto(`http://localhost:3000${opts.path}`);
+        await page.goto(`http://localhost:9000${opts.path}`);
       }
       if (opts.waitForSelector) {
         await page.waitForSelector(opts.waitForSelector);

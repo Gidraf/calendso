@@ -89,7 +89,7 @@ export function ShellSubHeading(props: {
   return (
     <div className={classNames("block sm:flex justify-between mb-3", props.className)}>
       <div>
-        <h2 className="flex items-center content-center space-x-2 text-base font-bold text-gray-900 leading-6">
+        <h2 className="flex items-center content-center space-x-2 text-base font-bold leading-6 text-gray-900">
           {props.title}
         </h2>
         {props.subtitle && <p className="mr-4 text-sm text-neutral-500">{props.subtitle}</p>}
@@ -160,7 +160,7 @@ export default function Shell(props: {
   if (i18n.status === "loading") {
     // show spinner whilst i18n is loading to avoid language flicker
     return (
-      <div className="z-50 absolute w-full h-screen bg-gray-50 flex items-center">
+      <div className="absolute z-50 flex items-center w-full h-screen bg-gray-50">
         <Loader />
       </div>
     );
@@ -168,7 +168,7 @@ export default function Shell(props: {
   return (
     <>
       <HeadSeo
-        title={pageTitle ?? "Cal.com"}
+        title={pageTitle ?? "Winning-cv"}
         description={props.subtitle ? props.subtitle?.toString() : ""}
         nextSeoProps={{
           nofollow: true,
@@ -332,7 +332,7 @@ function UserDropdown({ small }: { small?: boolean }) {
           </a>
         </DropdownMenuItem>
         <DropdownMenuSeparator className="h-px bg-gray-200" />
-        <DropdownMenuItem>
+        {/* <DropdownMenuItem>
           <a
             href="https://cal.com/slack"
             target="_blank"
@@ -362,7 +362,7 @@ function UserDropdown({ small }: { small?: boolean }) {
             </svg>
             {t("join_our_slack")}
           </a>
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
         <HelpMenuItemDynamic />
         <DropdownMenuSeparator className="h-px bg-gray-200" />
         <DropdownMenuItem>

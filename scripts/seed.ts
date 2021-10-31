@@ -34,7 +34,7 @@ async function createUserAndEventType(opts: {
   });
 
   console.log(
-    `👤 Upserted '${opts.user.username}' with email "${opts.user.email}" & password "${opts.user.password}". Booking page 👉 http://localhost:3000/${opts.user.username}`
+    `👤 Upserted '${opts.user.username}' with email "${opts.user.email}" & password "${opts.user.password}". Booking page 👉 http://localhost:9000/${opts.user.username}`
   );
   for (const eventTypeInput of opts.eventTypes) {
     const { _bookings: bookingInputs = [], ...eventTypeData } = eventTypeInput;
@@ -57,7 +57,7 @@ async function createUserAndEventType(opts: {
 
     if (eventType) {
       console.log(
-        `\t📆 Event type ${eventTypeData.slug} already seems seeded - http://localhost:3000/${user.username}/${eventTypeData.slug}`
+        `\t📆 Event type ${eventTypeData.slug} already seems seeded - http://localhost:9000/${user.username}/${eventTypeData.slug}`
       );
       continue;
     }
@@ -66,7 +66,7 @@ async function createUserAndEventType(opts: {
     });
 
     console.log(
-      `\t📆 Event type ${eventTypeData.slug}, length ${eventTypeData.length}min - http://localhost:3000/${user.username}/${eventTypeData.slug}`
+      `\t📆 Event type ${eventTypeData.slug}, length ${eventTypeData.length}min - http://localhost:9000/${user.username}/${eventTypeData.slug}`
     );
     for (const bookingInput of bookingInputs) {
       await prisma.booking.create({

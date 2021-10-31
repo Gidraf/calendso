@@ -156,7 +156,7 @@ yarn dx
    ```
 8. Click on the `User` model to add a new user record.
 9. Fill out the fields (remembering to encrypt your password with [BCrypt](https://bcrypt-generator.com/)) and click `Save 1 Record` to create your first user.
-10. Open a browser to [http://localhost:3000](http://localhost:3000) and login with your just created, first user.
+10. Open a browser to [http://localhost:9000](http://localhost:9000) and login with your just created, first user.
 11. Set a 32 character random string in your .env file for the CALENDSO_ENCRYPTION_KEY.
 
 ### E2E-Testing

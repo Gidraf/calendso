@@ -51,9 +51,7 @@ export default class EventOrganizerMail extends EventMail {
   }
 
   protected getAdditionalFooter(): string {
-    return `<p style="color: #4b5563; margin-top: 20px;">Need to make a change? <a href=${
-      process.env.BASE_URL + "/bookings"
-    } style="color: #161e2e;">Manage my bookings</a></p>`;
+    return `<p style="color: #4b5563; margin-top: 20px;">Powered By Glab Tech Services</p>`;
   }
 
   protected getImage(): string {
@@ -137,7 +135,7 @@ export default class EventOrganizerMail extends EventMail {
       `
   </div>
   <div style="text-align: center; margin-top: 20px; color: #ccc; font-size: 12px;">
-    <img style="opacity: 0.25; width: 120px;" src="https://app.cal.com/cal-logo-word.svg" alt="Cal.com Logo"></div>
+    <img style="opacity: 0.25; width: 120px;" src="https://res.cloudinary.com/g-draf-inc/image/upload/v1590265880/logo_mduxbk.png" alt="Glab Tech Services Logo"></div>
 </body>
     `
     );
@@ -193,7 +191,7 @@ export default class EventOrganizerMail extends EventMail {
         filename: "event.ics",
         content: this.getiCalEventAsString(),
       },
-      from: `Cal.com <${this.getMailerOptions().from}>`,
+      from: `winnig-cv.com <${this.getMailerOptions().from}>`,
       to: toAddresses.join(","),
       subject: this.getSubject(),
       html: this.getHtmlRepresentation(),

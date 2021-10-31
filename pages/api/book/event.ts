@@ -294,7 +294,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       },
       data: {
         uid,
-        mpesaMsg: reqBody.mpesaMsg,
         title: evt.title,
         startTime: dayjs(evt.startTime).toDate(),
         endTime: dayjs(evt.endTime).toDate(),

@@ -4,18 +4,18 @@ info:
   description: The open source Calendly alternative.
   contact:
     name: Support
-    email: support@cal.com
+    email: orenjagidaf@gmail.com
   license:
     name: MIT License
     url: "https://opensource.org/licenses/MIT"
   version: 1.0.0
-  termsOfService: "https://cal.com/terms"
+  termsOfService: "https://procv.com/terms"
 server:
   url: "http://localhost:{port}"
   description: Local Development Server
   variables:
     port:
-      default: "3000"
+      default: "9000"
 tags:
   - name: Authentication
     description: "Auth routes, powered by Next-Auth.js"

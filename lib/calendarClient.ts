@@ -113,7 +113,6 @@ const o365Auth = (credential) => {
 export type Person = { name: string; email: string; timeZone: string };
 
 export interface CalendarEvent {
-  mpesaMsg: any;
   type: string;
   title: string;
   startTime: string;

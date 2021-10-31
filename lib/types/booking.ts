@@ -15,7 +15,6 @@ export type BookingCreateBody = {
   timeZone: string;
   users?: string[];
   user?: string;
-  mpesaMsg: string;
 };
 
 export type BookingResponse = Booking & {

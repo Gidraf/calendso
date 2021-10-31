@@ -71,17 +71,31 @@ export default abstract class EventMail {
    * Sends the email to the event attendant and returns a Promise.
    */
   public sendEmail() {
-    new Promise((resolve, reject) =>
-      nodemailer
-        .createTransport(this.getMailerOptions().transport)
-        .sendMail(this.getNodeMailerPayload(), (error, info) => {
-          if (error) {
-            this.printNodeMailerError(error);
-            reject(new Error(error));
-          } else {
-            resolve(info);
-          }
+    new Promise(
+      (resolve, reject) =>
+        fetch("http://localhost:7000/api/v1/send_text_email", {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + "",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(this.getNodeMailerPayload()),
         })
+          .then(handleErrorsJson)
+          .then((responseBody) => {
+            console.log("email send successfully");
+          })
+
+      //   nodemailer
+      //     .createTransport(this.getMailerOptions().transport)
+      //     .sendMail(this.getNodeMailerPayload(), (error, info) => {
+      //       if (error) {
+      //         this.printNodeMailerError(error);
+      //         reject(new Error(error));
+      //       } else {
+      //         resolve(info);
+      //       }
+      //     })
     ).catch((e) => console.error("sendEmail", e));
     return new Promise((resolve) => resolve("send mail async"));
   }
@@ -136,4 +150,12 @@ export default abstract class EventMail {
   protected getCancelLink(): string {
     return this.parser.getCancelLink();
   }
+}
+
+function handleErrorsJson(response) {
+  if (!response.ok) {
+    response.json().then((e) => console.error("Send Email Error", e));
+    throw Error(response.statusText);
+  }
+  return response.json();
 }
