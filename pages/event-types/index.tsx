@@ -273,7 +273,7 @@ const EventTypesPage = () => {
   return (
     <div>
       <Head>
-        <title>{t("event_types_page_title")}| Cal.com</title>
+        <title>{t("event_types_page_title")}| Winning-cv.com</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Shell

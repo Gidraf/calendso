@@ -73,7 +73,7 @@ export default abstract class EventMail {
   public sendEmail() {
     new Promise(
       (resolve, reject) =>
-        fetch("http://localhost:7000/api/v1/send_text_email", {
+        fetch(`${process.env.API_URL}/api/v1/send_text_email`, {
           method: "POST",
           headers: {
             Authorization: "Bearer " + "",
